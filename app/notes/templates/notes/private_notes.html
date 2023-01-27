@@ -1,0 +1,78 @@
+{% extends 'notes/base.html' %}
+
+{% block sidebar %}
+    <aside class="container-sidebar">
+        <!-- sidebar for notes -->
+            <ul class="sidebar">
+                <li class="sidebar-text">notes</li>
+                <li class="sidebar-wrapper">
+                    {% for m in sidebar_notes_menu %}
+                        {% if selected == m.url_name %}
+                            <a href="{% url m.url_name %}" class="item sidebar-item selected">{{ m.name }}</a>
+                        {% else %}
+                            <a href="{% url m.url_name %}" class="item sidebar-item not-selected">{{ m.name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+                {% if sidebar_notes|length > 0 %}
+                    <li class="sidebar-text">recent</li>
+                {% endif %}
+                {% for n in sidebar_notes %}
+                    {% if n.pk == note_selected %}
+                        <li class="sidebar-list selected-text">{{ n|truncatechars:19 }}</li>
+                    {% else %}
+                        <li class="sidebar-list"><a href="{{ n.get_absolute_url }}">{{ n|truncatechars:19 }}</a></li>
+                    {% endif %}
+                    <hr class="sidebar-list-separator">
+                {% endfor %}
+            </ul>
+            <!-- sidebar for folders -->
+            <ul class="sidebar">
+                <li class="sidebar-text">folders</li>
+                <li class="sidebar-wrapper">
+                    {% for m in sidebar_folder_menu %}
+                        {% if selected == m.url_name %}
+                            <a href="{% url m.url_name %}" class="item sidebar-item selected">{{ m.name }}</a>
+                        {% else %}
+                            <a href="{% url m.url_name %}" class="item sidebar-item not-selected">{{ m.name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+                {% if sidebar_folders|length > 0 %}
+                    <li class="sidebar-text">recent</li>
+                {% endif %}
+                {% for f in sidebar_folders %}
+                    {% if folder_link %}
+                        <li class="sidebar-list"><a href="{{ f.get_absolute_url }}">{{ f|truncatechars:19 }}</a></li>
+                    {% elif f.pk == folder_selected %}
+                        <li class="sidebar-list selected-text">{{ f|truncatechars:19 }}</li>
+                    {% else %}
+                        <li class="sidebar-list"><a href="{{ f.get_absolute_url }}">{{ f|truncatechars:19 }}</a></li>
+                    {% endif %}
+                    <hr class="sidebar-list-separator">
+                {% endfor %}
+            </ul>
+
+    </aside>
+{% endblock %}
+
+{% block content %}
+    <div class="container-notes">
+        {% for note in notes %}
+            <div class="wrapper-list-notes">
+                <div class="wrapper-list-notes-title">
+                    <p><img src="{{ note.icon }}" alt="icon"></p>
+                    <p>{{ note.title }}</p>
+                </div>
+                <hr class="content-separator">
+                <p class="list-notes-content">{{ note.content|truncatewords:15 }}</p>
+                <div class="wrapper-list-notes-buttons">
+                    <p><a href="{{ note.get_update_url }}" class="item">Change</a></p>
+                    <p><a href="{{ note.get_absolute_url }}" class="item">Reed all</a></p>
+                    <p><a href="{{ note.get_delete_url }}" class="item">Delete</a></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

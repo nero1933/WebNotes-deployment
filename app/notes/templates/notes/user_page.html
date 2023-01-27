@@ -1,0 +1,23 @@
+{% extends 'notes/private_notes.html' %}
+
+{% block content %}
+    <div class="user-wrapper">
+        <p class="user-title">Hello, {{ user.username.capitalize }}</p>
+        <hr class="content-separator">
+        <p class="user-text"><a href={% url 'private_notes' %}>Total notes</a>: {{ total_notes }}</p>
+        <hr class="content-separator">
+        <p class="user-text"><a href={% url 'all_folders' %}>Total folders</a>: {{ total_folders }}</p>
+        <hr class="content-separator">
+{#        <p class="user-text"><a href="#"></a></p>#}
+{#        <hr class="content-separator">#}
+{#        <p class="user-text"><a href="#">Change email</a></p>#}
+{#        <hr class="content-separator">#}
+{#        <p class="user-text"><a href="#">Change password</a></p>#}
+{#        <hr class="content-separator">#}
+        <p class="user-text"><a href="{% url 'delete_all_notes' %}">Delete all notes</a></p>
+        <hr class="content-separator">
+        <p class="user-text"><a href="{% url 'delete_all_folders' %}">Delete all folders</a></p>
+        <hr class="content-separator">
+        <p class="user-text"><a href="{% url 'delete_user' username=user.username %}">Delete account</a></p>
+    </div>
+{% endblock %}

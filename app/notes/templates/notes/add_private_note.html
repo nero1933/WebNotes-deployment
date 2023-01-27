@@ -1,0 +1,20 @@
+{% extends 'notes/private_notes.html' %}
+
+{% block content %}
+    <div class="wrapper-content">
+        <p class="content-title">{{ title }}</p>
+        <hr class="content-separator">
+        <form class="container-form" action="{% url 'add_private_note' %}" method="post">
+            {% csrf_token %}
+            {% for f in form %}
+                <p class="content-errors">{{ f.errors }}</p>
+                <p class="content-label"><label for="{{ f.id_for_label }}">{{ f.label }}</label></p>
+                <p>{{ f }}</p>
+            {% endfor %}
+            <div class="wrapper-buttons">
+                <button type="submit" class="item not-selected button-add">Add Note</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

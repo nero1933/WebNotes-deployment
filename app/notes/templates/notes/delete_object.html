@@ -1,0 +1,12 @@
+{% extends 'notes/private_notes.html' %}
+
+{% block content %}
+    <div class="wrapper-delete">
+        <form method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+            {{ form }}
+            <button class="item not-selected button-delete" type="submit">Confirm</button>
+        </form>
+    </div>
+{% endblock %}

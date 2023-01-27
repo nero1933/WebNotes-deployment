@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from .models import Sample
+from .models import *
 
-
-admin.site.register(Sample)
+# Register your models here.
+admin.site.register(Note)
+admin.site.register(Folder)
 

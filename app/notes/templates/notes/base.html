@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <link href="{% static 'notes/css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'notes/images/home-icon.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- header -->
+{% block header %}
+<header class="container-header">
+    <nav>
+        <ul>
+            {% if request.user.is_authenticated %}
+                {% for m in menu %}
+                    {% if selected_menu == m.url_name %}
+                        <li class="item nav-item selected"><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                    {% else %}
+                        <li class="item nav-item not-selected"><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <li  class="item nav-item not-selected">WebNotes</li>
+            {% endif %}
+        </ul>
+        <ul>
+            {% if request.user.is_authenticated %}
+                {% if user_selected %}
+                    <li class="item nav-item-user selected"><a href="{{ user.get_absolute_url }}">{{ user.username.capitalize }}</a></li>
+                {% else %}
+                    <li class="item nav-item-user not-selected"><a href="{{ user.get_absolute_url }}">{{ user.username.capitalize }}</a></li>
+                {% endif %}
+                <li class="item nav-item-user not-selected"><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                {% if selected == 'login' %}
+                    <li class="item nav-item-user selected"><a href="{% url 'login' %}">Login</a></li>
+                {% else %}
+                    <li class="item nav-item-user not-selected"><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+                {% if selected == 'sign_in' %}
+                    <li class="item nav-item-user selected"><a href="{% url 'sign_in' %}">Sign in</a></li>
+                {% else %}
+                    <li class="item nav-item-user not-selected"><a href="{% url 'sign_in' %}">Sign in</a></li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+{% endblock %}
+
+<!-- container-main -->
+<div class="container-main">
+    <!-- sidebar -->
+    {% block sidebar %}{% endblock %}
+        <!-- container for content & pagination -->
+        <div class="container-content-pagination">
+            <!-- content -->
+            <div class="container-content">
+                {% block content %}{% endblock %}
+            </div>
+            <!-- pagination -->
+            {% if  page_obj.has_other_pages %}
+                <!-- container pagination -->
+                <nav class="container-pagination">
+                    <ul class="pagination">
+                        <!-- left arrow -->
+                        {% if page_obj.has_previous %}
+                            <li class="item pagination-item pagination-previous not-selected">
+                                <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                            </li>
+                        {% endif %}
+                        <!-- current page +/- 2 pages -->
+                        {% for p in paginator.page_range %}
+                            {% if page_obj.number == p %}
+                                <li class="item pagination-item selected">
+                                    {{ p }}
+                                </li>
+                            {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                                <li class="item pagination-item not-selected">
+                                    <a href="?page={{ p }}">{{ p }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        <!-- right arrow -->
+                        {% if page_obj.has_next %}
+                            <li class="item pagination-item pagination-next not-selected">
+                                <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+</div>
+
+<!-- footer -->
+<footer>
+    <span>WebNotes is a site made by Nero for learning purpose</span>
+</footer>
+
+</body>
+</html>

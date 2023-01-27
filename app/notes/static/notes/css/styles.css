@@ -1,0 +1,601 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    font-size: 20px;
+    line-height: 1.25;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background: #f1f7ff;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover, button:hover {
+	color: #CC0000;
+    cursor: pointer;
+}
+
+/* containers starts */
+
+.container-header {
+    height: 8vh;
+
+    margin: 2vh 25px 0 25px;
+    padding: 0 10px;
+}
+
+.container-main {
+    min-height: 85vh;
+
+    display: flex;
+}
+
+.container-sidebar {
+    width: 250px;
+    min-width: 250px;
+
+    margin: 3vh 0 25px 25px;
+}
+
+.container-content-pagination {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container-content {
+    width: 100%;
+
+    padding: 3vh 6vh 3vh 6vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-notes {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2vw;
+}
+
+.container-pagination {
+    min-height: 7vh;
+
+    margin: 0 auto 2vh auto;
+
+    display: flex;
+}
+
+/* containers ends */
+
+/* boxes & buttons starts */
+
+.pagination, .sidebar, header, .wrapper-content, .wrapper-list-notes, .wrapper-note, .wrapper-delete, .wrapper-folders,
+.add-folder-wrapper, .index-wrapper, .user-wrapper, .log_sign_in-wrapper {
+    background:  #cdd7e6;
+    border-radius: 6px;
+    box-shadow: -5px -5px 7px #ffffff50, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+
+.item {
+    background:  #cdd7e6;
+    border-radius: 6px;
+
+    flex: 1;
+}
+
+.not-selected {
+    box-shadow: -5px -5px 7px #ffffff50, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+
+.selected-text, .selected {
+    color: #002e80;
+    font-weight: bold;
+}
+
+.selected {
+    box-shadow: inset -5px -5px 7px #ffffff50,
+    inset 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+
+/* boxes & buttons ends */
+
+/* header starts */
+
+header nav {
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header ul {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+header li {
+    list-style: none;
+}
+
+.nav-item {
+    width: 180px;
+
+    margin-right: 25px;
+    padding: 10px;
+}
+
+.nav-item-user {
+    width: 120px;
+
+    margin-left: 25px;
+    padding: 10px;
+
+    list-style: none;
+}
+
+/* header ends */
+
+/* sidebar starts */
+
+.sidebar {
+    width: 100%;
+
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.sidebar:first-child {
+    margin-bottom: 3vh;
+}
+
+.sidebar-text {
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.sidebar-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.sidebar li {
+    list-style-type: none;
+}
+
+.sidebar-item {
+    width: 100%;
+
+    padding: 10px 0 10px 0;
+    margin: 5px 0 20px 0;
+}
+
+.sidebar-wrapper .sidebar-item:not(:only-child):first-child {
+    margin-right: 20px;
+}
+
+.sidebar-list { /* list of notes & folders */
+    padding: 5px 20px;
+
+    align-self: start;
+}
+
+.sidebar-list-separator {
+    width: 85%;
+
+    margin: 3px;
+
+    border: 1px solid #eee;
+}
+
+.sidebar-list-separator:last-child {
+    border: 0;
+}
+
+/* sidebar ends */
+
+
+/* content starts */
+
+/* index starts */
+
+.index-wrapper {
+    width: 40vw;
+    min-width: 30vw;
+
+    padding: 25px;
+}
+
+.index-title {
+    margin: auto;
+    padding-bottom: 35px;
+
+    text-align: center;
+    font-size: 24px;
+}
+
+.index-text {
+    padding-top: 35px;
+
+    line-height: 1.25;
+}
+
+/* index ends */
+
+.wrapper-content {
+    width: 100%;
+    max-width: 60vw;
+
+    padding: 35px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.content-title {
+    margin: 0 auto;
+    padding-bottom: 35px;
+
+    font-size: 24px;
+}
+
+.content-separator {
+    border: 1px solid #eee;
+}
+
+.content-label {
+    padding: 10px 5px;
+}
+
+/* list-notes starts */
+
+.wrapper-list-notes {
+    height: 25vh;
+
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper-list-notes-title {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-notes-content {
+    height: 100%;
+
+    padding: 10px 0;
+
+    word-break: break-all;
+}
+
+.wrapper-list-notes-buttons {
+    width: 100%;
+
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+/* list-notes ends */
+
+/* folders starts */
+
+.wrapper-folders {
+    width: 35vw;
+    min-width: 500px;
+
+    margin-left: 0;
+    padding: 25px;
+
+    align-self: center;
+}
+
+.folders-separator {
+    margin: 3px;
+
+    border: 1px solid #eee;
+}
+
+.folders-separator:last-child {
+    border: 0;
+}
+
+.wrapper-folder {
+    padding: 10px 5px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.folder-inner {
+    display: flex;
+}
+
+.folder-inner-item {
+    padding: 0 5px;
+}
+
+.folder-inner-item:last-child {
+    padding-right: 0;
+}
+
+/* folders ends */
+
+/* add-folder starts */
+
+.add-folder-wrapper {
+    padding: 35px;
+
+    width: 500px;
+}
+
+.add-folder-wrapper button {
+    margin-top: 35px;
+}
+
+/* add-folder ends */
+
+/* note starts */
+
+.wrapper-note {
+    width: 100%;
+    padding: 25px;
+}
+
+.note-title {
+    margin: 0 auto;
+    padding-bottom: 25px;
+
+    font-size: 24px;
+}
+
+.note-content {
+    padding-top: 25px;
+}
+
+.wrapper-note-buttons {
+
+}
+
+/* note ends */
+
+/* content forms starts */
+
+.form-input, .form-textarea, .form-select, .form-input {
+    width: 100%;
+
+    padding: 3px;
+
+    background: #f1f7ff;
+    border: 0;
+}
+
+.form-select {
+    width: 10vw;
+}
+
+/* content delete starts */
+
+.wrapper-delete {
+    width: 30vw;
+
+    padding: 25px;
+}
+
+.button-delete {
+    width: 100%;
+    margin-top: 25px;
+    padding: 10px;
+
+    float: start;
+
+    border: none;
+}
+
+/* content delete ends */
+
+
+/* content forms ends */
+
+/* content buttons starts */
+
+.note-button {
+    width: 80px;
+
+    padding: 3px;
+
+    display: inline-block;
+}
+
+.wrapper-buttons {
+    margin-top: 35px;
+
+    text-align: center;
+}
+
+.button, .button-add {
+    width: 150px;
+    padding: 10px;
+
+    display: inline-block;
+
+    border: none;
+}
+
+.button:first-child {
+    float: left;
+}
+
+.button:last-child {
+    float: right;
+}
+
+.button-add {
+    float: left;
+}
+
+/* content buttons ends */
+
+/* log_sign_in starts */
+
+.log_sign_in-wrapper {
+    width: 30vw;
+    min-width: 590px;
+
+    padding: 35px;
+}
+
+.log_sign_in-form-item{
+    padding: 10px 0;
+}
+
+.log_sign_in-wrapper hr {
+    margin-bottom: 15px;
+}
+
+.log_sign_in-form-item {
+    display: grid;
+    grid-gap: 2vw;
+    grid-template-columns: 1fr 2fr;
+}
+
+.log_sign_in-wrapper label {
+    margin-bottom: 5px;
+}
+
+.log_sign_in-wrapper button {
+    margin-top: 25px;
+}
+
+/* log_sign_in ends */
+
+/* login starts */
+
+.login-wrapper {
+    padding: 35px;
+}
+
+/* login ends */
+
+/* user starts */
+
+.user-wrapper {
+    width: 20vw;
+    min-width: 400px;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+.user-title {
+    margin: 0 auto;
+    padding-bottom: 25px;
+
+    font-size: 24px;
+}
+
+.user-text {
+    padding: 10px 0;
+}
+
+/* user ends */
+
+/* content ends */
+
+
+/* --- SEPARATOR --- */
+
+
+/* pagination starts */
+
+.pagination {
+    height: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+
+    display: flex;
+    place-items: center;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
+
+    list-style: none;
+}
+
+.pagination li, .pagination a {
+    height: 40px;
+    width: 50px;
+
+    display: block;
+
+    color: #4d3252;
+    text-decoration: none;
+    line-height: 45px;
+}
+
+.pagination-item {
+    margin: 0 5px;
+
+    flex: 1;
+}
+
+.pagination-previous {
+  margin: 0 15px 0 10px;
+}
+
+.pagination-next {
+  margin: 0 10px 0 15px;
+}
+
+/* pagination ends */
+
+/* footer starts */
+
+footer {
+    width: 100%;
+    height: 5%;
+    min-height: 5vh;
+
+    position: relative;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: darkgrey;
+}
+
+/* footer ends */

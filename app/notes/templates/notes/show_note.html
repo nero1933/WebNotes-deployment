@@ -1,0 +1,13 @@
+{% extends 'notes/private_notes.html' %}
+
+{% block content %}
+    <div class="wrapper-note">
+        <p class="note-title">{{ note.title }}</p>
+        <hr class="content-separator">
+        <p class="note-content">{{ note.content }}</p>
+        <div class="wrapper-buttons">
+            <a href="{{ note.get_update_url }}" class="item not-selected button">Update Note</a>
+            <a href="{{ note.get_delete_url }}" class="item not-selected button">Delete Note</a>
+        </div>
+    </div>
+{% endblock %}

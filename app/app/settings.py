@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'notes',
+    'notes.apps.NotesConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +136,7 @@ MEDIA_ROOT = '/vol/web/media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/accounts/%s" % u.username,
+}

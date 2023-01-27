@@ -1,0 +1,17 @@
+{% extends 'notes/private_notes.html' %}
+
+{% block content %}
+    <div class="wrapper-folders">
+    <p class="content-title">{{ title }}</p>
+        {% for folder in folders %}
+            <hr class="folders-separator">
+            <div class="wrapper-folder">
+                <p><a href="{{ folder.get_absolute_url }}">{{ folder }}</a></p>
+                <div class="folder-inner">
+                    <p class="folder-inner-item"><a href="{{ folder.get_absolute_url }}" class="item">Reed all</a></p>
+                    <p class="folder-inner-item"><a href="{{ folder.get_delete_url }}" class="item">Delete</a></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

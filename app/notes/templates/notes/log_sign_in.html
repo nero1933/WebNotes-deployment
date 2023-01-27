@@ -1,0 +1,16 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+    <div class="log_sign_in-wrapper">
+        <p class="content-title">{{ title }}</p>
+        <hr class="content-separator">
+        <form method="post">
+            {% csrf_token %}
+            {% for f in form %}
+                <p class="log_sign_in-form-item"><label for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+                <div>{{ f.errors }}</div>
+            {% endfor %}
+        <button class="item not-selected button" type="submit">{{ title }}</button>
+        </form>
+    </div>
+{% endblock %}
